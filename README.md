@@ -8,12 +8,12 @@ In order to accelerate further research based on Xception, I would like to share
 
 **This code and the pre-trained weights only can be used for research purposes.**
 
-The canonical input image size for this Xception is 299x299, and the input preprocessing function is the same as Inception V3. According to the doc in Keras, this model gets to a top-1 validation accuracy of 0.790 and a top-5 validation accuracy of 0.945 On ImageNet.
+The canonical input image size for this Xception is 299x299, and the input preprocessing function is the same as Inception V3. According to the doc in Keras, this model gets to a top-1 validation accuracy of 0.790 and a top-5 validation accuracy of 0.945 on ImageNet.
 
-The code is tested in Tensorflow 1.5, Python 3.5, Ubuntu 16.04. 
+The code is tested under Tensorflow 1.5, Python 3.5, Ubuntu 16.04. 
 
 If you need test this code by yourself, just follow the code snippets at the bottom of [Xception.py](https://github.com/HiKapok/Xception_Tensorflow/blob/master/Xception.py), and put the pre-trained weights under the 'model' folder. 
 
-Other scaffolding need to be build for training from scratch.
+Other scaffold need to be build for training from scratch. You can refer to [resnet/imagenet_main](https://github.com/tensorflow/models/blob/22ded0410d5bed85a88329e852cd20882593652b/official/resnet/imagenet_main.py#L189) for adding weight decay to the loss manually.
 ##  ##
 The MIT License
