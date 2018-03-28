@@ -8,7 +8,7 @@ In order to accelerate further research based on Xception, I would like to share
 
 **This code and the pre-trained weights only can be used for research purposes.**
 
-The canonical input image size for this Xception is 299x299, and the input preprocessing function is the same as Inception V3. According to the doc in Keras, this model gets to a top-1 validation accuracy of 0.790 and a top-5 validation accuracy of 0.945 on ImageNet.
+The canonical input image size for this Xception is 299x299, each pixel value should in range [-1,1](RGB order), and the input preprocessing function is the same as Inception V3. According to the doc in Keras, this model gets to a top-1 validation accuracy of 0.790 and a top-5 validation accuracy of 0.945 on ImageNet.
 
 The code is tested under Tensorflow 1.5, Python 3.5, Ubuntu 16.04. 
 
