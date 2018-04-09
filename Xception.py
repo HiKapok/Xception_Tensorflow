@@ -98,7 +98,7 @@ def XceptionModel(input_image, num_classes, is_training = False, data_format='ch
                                     padding='same', data_format=data_format,
                                     name='block2_pool')
 
-    inputs = inputs + residual
+    inputs = tf.add(inputs, residual, name='residual_add_0')
     residual = tf.layers.conv2d(inputs, 256, (1, 1), use_bias=False, name='conv2d_2', strides=(2, 2),
                 padding='same', data_format=data_format, activation=None,
                 kernel_initializer=tf.contrib.layers.xavier_initializer(),
@@ -112,7 +112,7 @@ def XceptionModel(input_image, num_classes, is_training = False, data_format='ch
     inputs = tf.layers.max_pooling2d(inputs, pool_size=(3, 3), strides=(2, 2),
                                     padding='same', data_format=data_format,
                                     name='block3_pool')
-    inputs = inputs + residual
+    inputs = tf.add(inputs, residual, name='residual_add_1')
 
     residual = tf.layers.conv2d(inputs, 728, (1, 1), use_bias=False, name='conv2d_3', strides=(2, 2),
                 padding='same', data_format=data_format, activation=None,
@@ -127,7 +127,7 @@ def XceptionModel(input_image, num_classes, is_training = False, data_format='ch
     inputs = tf.layers.max_pooling2d(inputs, pool_size=(3, 3), strides=(2, 2),
                                     padding='same', data_format=data_format,
                                     name='block4_pool')
-    inputs = inputs + residual
+    inputs = tf.add(inputs, residual, name='residual_add_2')
     # Middle Flow
     for index in range(8):
         residual = inputs
@@ -136,8 +136,7 @@ def XceptionModel(input_image, num_classes, is_training = False, data_format='ch
         inputs = relu_separable_bn_block(inputs, 728, prefix + '_sepconv1', is_training, data_format)
         inputs = relu_separable_bn_block(inputs, 728, prefix + '_sepconv2', is_training, data_format)
         inputs = relu_separable_bn_block(inputs, 728, prefix + '_sepconv3', is_training, data_format)
-
-        inputs = inputs + residual
+        inputs = tf.add(inputs, residual, name=prefix + '_residual_add')
     # Exit Flow
     residual = tf.layers.conv2d(inputs, 1024, (1, 1), use_bias=False, name='conv2d_4', strides=(2, 2),
                 padding='same', data_format=data_format, activation=None,
@@ -152,7 +151,7 @@ def XceptionModel(input_image, num_classes, is_training = False, data_format='ch
     inputs = tf.layers.max_pooling2d(inputs, pool_size=(3, 3), strides=(2, 2),
                                     padding='same', data_format=data_format,
                                     name='block13_pool')
-    inputs = inputs + residual
+    inputs = tf.add(inputs, residual, name='residual_add_3')
 
     inputs = tf.layers.separable_conv2d(inputs, 1536, (3, 3),
                         strides=(1, 1), padding='same',
